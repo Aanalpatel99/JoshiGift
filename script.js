@@ -1,36 +1,27 @@
-// Data embedded directly into the script
-const data = {
-  compliments: [
-    "You deserve the world, Princess!",
-    "You are unstoppable.",
-    "Your kindness makes everything brighter.",
-    "You're the definition of grace and power.",
-    "You light up every room you enter."
-  ],
-  self_care: [
-    "Take a bubble bath today.",
-    "Treat yourself to your favorite dessert.",
-    "Write down 3 things you love about yourself.",
-    "Put on your comfiest pajamas and relax.",
-    "Play your favorite song and dance around."
-  ],
-  quotes: [
-    "She believed she could, so she did.",
-    "You are more than enough.",
-    "Be your own kind of beautiful.",
-    "Queen energy only.",
-    "Your potential is limitless."
-  ]
-};
+let data = [];
+
+fetch("data.csv")
+  .then(response => response.text())
+  .then(text => {
+    // Use XLSX namespace here
+    const workbook = XLSX.read(text, { type: "string" });
+    const firstSheet = workbook.Sheets[workbook.SheetNames[0]];
+    data = XLSX.utils.sheet_to_json(firstSheet);
+    console.log("CSV data loaded:", data);
+  });
 
 function showTreatment() {
-  const compliment = data.compliments[Math.floor(Math.random() * data.compliments.length)];
-  const selfCare = data.self_care[Math.floor(Math.random() * data.self_care.length)];
-  const quote = data.quotes[Math.floor(Math.random() * data.quotes.length)];
+  if (data.length === 0) {
+    document.getElementById("message").innerText = "Loading messages...";
+    return;
+  }
 
-  document.getElementById('message').innerHTML = `
-    <p><strong>Compliment:</strong> ${compliment}</p>
-    <p><strong>Self-Care Tip:</strong> ${selfCare}</p>
-    <p><strong>Quote:</strong> ${quote}</p>
+  // Pick a random row
+  const row = data[Math.floor(Math.random() * data.length)];
+
+  document.getElementById("message").innerHTML = `
+    <p><strong>Compliment:</strong> ${row.Compliment}</p>
+    <p><strong>Self-Care Tip:</strong> ${row.SelfCare}</p>
+    <p><strong>Quote:</strong> ${row.Quote}</p>
   `;
 }
