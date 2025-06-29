@@ -39,9 +39,6 @@
 .z-30 {
   z-index: 30;
 }
-.container {
-  width: 100%;
-}
 .mx-auto {
   margin-inline: auto;
 }
@@ -86,10 +83,6 @@
 }
 .rounded-full {
   border-radius: calc(infinity * 1px);
-}
-.border {
-  border-style: var(--tw-border-style);
-  border-width: 1px;
 }
 .bg-\[\#6bbe88\] {
   background-color: #6bbe88;
@@ -409,11 +402,6 @@ button:hover {
   syntax: "*";
   inherits: false;
 }
-@property --tw-border-style {
-  syntax: "*";
-  inherits: false;
-  initial-value: solid;
-}
 @property --tw-duration {
   syntax: "*";
   inherits: false;
@@ -538,7 +526,6 @@ button:hover {
       --tw-rotate-z: initial;
       --tw-skew-x: initial;
       --tw-skew-y: initial;
-      --tw-border-style: solid;
       --tw-duration: initial;
       --tw-shadow: 0 0 #0000;
       --tw-shadow-color: initial;
