@@ -22,7 +22,6 @@ const backgroundColors = [
 ];
 let currentBgColorIndex = 0;
 
-// Store Spotify embed codes here, mapped by the ID of the link element
 const spotifyEmbedCodes = {
   "spotify-happy-vibes": '<iframe style="border-radius:12px" src="https://open.spotify.com/embed/playlist/37i9dQZF1DX2nX8HgBDmgL?utm_source=generator" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>',
   "spotify-sad-healing": '<iframe style="border-radius:12px" src="https://open.spotify.com/embed/playlist/0FBThDDbHEBUKoBbiNzSVC?utm_source=generator" width="100%" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>',
@@ -30,7 +29,6 @@ const spotifyEmbedCodes = {
   "spotify-sleep-sounds": '<iframe style="border-radius:12px" src="https://open.spotify.com/embed/playlist/37i9dQZF1DX4sWSpwq3LiO?utm_source=generator" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>'
 };
 
-// Store YouTube embed codes here, mapped by the ID of the link element
 const youtubeEmbedCodes = {
   "youtube-happy": '<iframe width="100%" height="315" src="https://www.youtube.com/embed/cazdPa9icmo?si=RC4Ndup43oc-Uctt" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>',
   "youtube-motivational": '<iframe width="100%" height="315" src="https://www.youtube.com/embed/zWwrzfsUJVg?si=9X6fY0INbUyMBJgS" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>',
@@ -140,13 +138,13 @@ function showTreatment() {
 
     messageContentDiv.innerHTML = `
       <p class="message-field text-xl md:text-2xl font-semibold text-[var(--dark-text)]">
-        <strong>Compliment:</strong> ${row.Compliment}
+        <strong>🤎 Compliment:</strong> ${row.Compliment} <strong>🤎</strong>
       </p>
       <p class="message-field text-lg md:text-xl text-[var(--dark-text)]">
-        <strong>Self-Care Tip:</strong> ${row.SelfCare}
+        <strong>🎀 Self-Care Tip:</strong> ${row.SelfCare} <strong>🎀</strong>
       </p>
-      <p class="message-field text-lg md:text-xl italic text-[var(--dark-text)]">
-        <strong>Quote:</strong> "${row.Quote}"
+      <p class="message-field text-lg md:text-xl text-[var(--dark-text)]">
+        <strong>🖤 Quote:</strong> "${row.Quote}" <strong>🖤</strong>
       </p>
     `;
     messageContentDiv.classList.remove('opacity-0', '-translate-y-2');
@@ -186,5 +184,28 @@ youtubeDropdown.addEventListener('click', (event) => {
 closeEmbedButton.addEventListener('click', hideEmbed);
 
 homeButton.addEventListener('click', () => {
-    location.reload();
+  location.reload();
 });
+
+const heartColors = ['var(--pastel-pink)', 'var(--pastel-purple)', 'var(--sage-green)'];
+
+function createFloatingHeart() {
+  const heart = document.createElement('div');
+  heart.classList.add('heart');
+
+  const startX = Math.random() * 100;
+  heart.style.left = `${startX}vw`;
+  heart.style.bottom = `-10vh`;
+
+  const colors = ['var(--pastel-pink)', 'var(--pastel-purple)', 'var(--sage-green)'];
+  heart.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+
+  document.getElementById('heart-container').appendChild(heart);
+
+  heart.addEventListener('animationend', () => {
+    heart.remove();
+  });
+}
+
+setInterval(createFloatingHeart, 800);
+
