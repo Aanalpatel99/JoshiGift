@@ -53,8 +53,10 @@
     <div class="w-full flex flex-col sm:flex-row sm:space-x-4 space-y-4 sm:space-y-0 mt-8">
       <div class="relative w-full sm:w-1/2">
         <button id="spotify-button"
-          class="w-full relative z-20 bg-white text-white font-bold py-5 px-8 text-xl md:text-2xl rounded-full shadow-lg hover:shadow-xl transition-all duration-300 ease-in-out transform hover:-translate-y-1 tracking-wide focus:outline-none focus:ring-4 focus:ring-[#1DB954] focus:ring-opacity-50 overflow-hidden">
-          <i class="fab fa-spotify mr-2"></i>Spotify Playlists
+          class="w-full relative z-20 text-white font-bold py-5 px-8 text-xl md:text-2xl rounded-full shadow-lg hover:shadow-xl transition-all duration-300 ease-in-out transform hover:-translate-y-1 tracking-wide focus:outline-none focus:ring-4 focus:ring-[#50bb75] focus:ring-opacity-50 overflow-hidden"
+          aria-haspopup="true" aria-expanded="false">
+          <i class="fab fa-spotify mr-2"></i>Spotify Playlists <i
+            class="fas fa-chevron-down ml-2 dropdown-button-arrow"></i>
         </button>
         <div id="spotify-dropdown"
           class="dropdown-content absolute left-0 right-0 mt-2 bg-white rounded-lg shadow-xl py-2 z-30 opacity-0 transform scale-95 origin-top transition-all duration-200 ease-out pointer-events-none">
@@ -67,8 +69,10 @@
 
       <div class="relative w-full sm:w-1/2">
         <button id="youtube-button"
-          class="w-full relative z-20 bg-white text-white font-bold py-5 px-8 text-xl md:text-2xl rounded-full shadow-lg hover:shadow-xl transition-all duration-300 ease-in-out transform hover:-translate-y-1 tracking-wide focus:outline-none focus:ring-4 focus:ring-[#FF0000] focus:ring-opacity-50 overflow-hidden">
-          <i class="fab fa-youtube mr-2"></i>YouTube Playlists
+          class="w-full relative z-20 text-white font-bold py-5 px-8 text-xl md:text-2xl rounded-full shadow-lg hover:shadow-xl transition-all duration-300 ease-in-out transform hover:-translate-y-1 tracking-wide focus:outline-none focus:ring-4 focus:ring-[#d66262] focus:ring-opacity-50 overflow-hidden"
+          aria-haspopup="true" aria-expanded="false">
+          <i class="fab fa-youtube mr-2"></i>YouTube Playlists <i
+            class="fas fa-chevron-down ml-2 dropdown-button-arrow"></i>
         </button>
         <div id="youtube-dropdown"
           class="dropdown-content absolute left-0 right-0 mt-2 bg-white rounded-lg shadow-xl py-2 z-30 opacity-0 transform scale-95 origin-top transition-all duration-200 ease-out pointer-events-none">

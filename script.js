@@ -26,7 +26,7 @@ const spotifyEmbedCodes = {
   "spotify-happy-vibes": '<iframe style="border-radius:12px" src="https://open.spotify.com/embed/playlist/37i9dQZF1DX2nX8HgBDmgL?utm_source=generator" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>',
   "spotify-sad-healing": '<iframe style="border-radius:12px" src="https://open.spotify.com/embed/playlist/0FBThDDbHEBUKoBbiNzSVC?utm_source=generator" width="100%" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>',
   "spotify-peaceful-retreat": '<iframe style="border-radius:12px" src="https://open.spotify.com/embed/playlist/37i9dQZF1DX4sWSpwq3LiO?utm_source=generator" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>',
-  "spotify-sleep-sounds": '<iframe style="border-radius:12px" src="https://open.spotify.com/embed/playlist/37i9dQZF1DX4sWSpwq3LiO?utm_source=generator" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>'
+  "spotify-sleep-sounds": '<iframe style="border-radius:12px" src="https://open.spotify.com/embed/playlist/37i9dQZF1DX0jgyAiPl8Af?utm_source=generator" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>'
 };
 
 const youtubeEmbedCodes = {
@@ -42,11 +42,23 @@ function updateBodyBackgroundColor() {
   bodyElement.style.backgroundColor = backgroundColors[currentBgColorIndex];
 }
 
-function toggleDropdown(dropdownElement, otherDropdownElement) {
+function toggleDropdown(dropdownElement, otherDropdownElement, buttonElement) {
+  const arrowIcon = buttonElement.querySelector('.dropdown-button-arrow');
+
   if (otherDropdownElement.classList.contains('show')) {
     otherDropdownElement.classList.remove('show');
+    otherDropdownElement.previousElementSibling.setAttribute('aria-expanded', 'false'); // Set other button's aria-expanded
+    otherDropdownElement.previousElementSibling.querySelector('.dropdown-button-arrow').classList.remove('rotated');
   }
-  dropdownElement.classList.toggle('show');
+
+  const isShowing = dropdownElement.classList.toggle('show');
+  buttonElement.setAttribute('aria-expanded', isShowing); // Set aria-expanded for the current button
+
+  if (isShowing) {
+    arrowIcon.classList.add('rotated');
+  } else {
+    arrowIcon.classList.remove('rotated');
+  }
   hideEmbed();
 }
 
@@ -69,9 +81,13 @@ document.addEventListener('click', (event) => {
 
   if (!isClickInsideSpotifyDropdown && !isClickInsideEmbedContainer) {
     spotifyDropdown.classList.remove('show');
+    spotifyButton.setAttribute('aria-expanded', 'false');
+    spotifyButton.querySelector('.dropdown-button-arrow').classList.remove('rotated');
   }
   if (!isClickInsideYoutubeDropdown && !isClickInsideEmbedContainer) {
     youtubeDropdown.classList.remove('show');
+    youtubeButton.setAttribute('aria-expanded', 'false');
+    youtubeButton.querySelector('.dropdown-button-arrow').classList.remove('rotated');
   }
 });
 
@@ -154,8 +170,8 @@ function showTreatment() {
   }, 300);
 }
 
-spotifyButton.addEventListener('click', () => toggleDropdown(spotifyDropdown, youtubeDropdown));
-youtubeButton.addEventListener('click', () => toggleDropdown(youtubeDropdown, spotifyDropdown));
+spotifyButton.addEventListener('click', () => toggleDropdown(spotifyDropdown, youtubeDropdown, spotifyButton));
+youtubeButton.addEventListener('click', () => toggleDropdown(youtubeDropdown, spotifyDropdown, youtubeButton));
 
 spotifyDropdown.addEventListener('click', (event) => {
   const target = event.target;

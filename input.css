@@ -310,6 +310,14 @@ button:hover {
   background-color: var(--sage-green);
 }
 
+.dropdown-button-arrow {
+  transition: transform 0.3s ease-out;
+}
+
+.dropdown-button-arrow.rotated {
+  transform: rotate(180deg);
+}
+
 @media (max-width: 640px) {
   #main-content-box {
     background-color: rgba(255, 255, 255, 0.55);
